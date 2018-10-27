@@ -69,7 +69,6 @@ for feature in layer:
     outfile = os.path.join(OUTPATH, basename + ".tif")
     cmd = "gdal_translate -a_srs epsg:2056  -of GTiff -co 'TILED=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' "
     cmd += " -co 'TILED=YES' -co 'PROFILE=GeoTIFF'"
-    cmd += " -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' "
     cmd += " " + infile + " " + outfile
     print cmd
     os.system(cmd)
