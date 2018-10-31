@@ -8,13 +8,9 @@ import sys
 VRT = "/lidar2018/99_Derivate/dtm_25cm/dtm_25cm.vrt"
 TINDEX = "../tileindex/lidar2018.shp"
 INPATH = "/lidar2018/99_Derivate/dtm_25cm/"
-OUTPATH = "/lidar2018/99_Derivate/dtm_25cm_hillshade/"
+OUTPATH = "/Samsung_T5/99_Derivate/dtm_25cm_hillshade/"
 TMPPATH = "/tmp/hillshade/dtm/"
 BUFFER = 10
-
-cmd = "mkdir -p " + TMPPATH
-print cmd
-os.system(cmd)
 
 shp = ogr.Open("../tileindex/lidar2018.shp")
 layer = shp.GetLayer(0)
@@ -35,6 +31,10 @@ for feature in layer:
     
     print minX 
     print minY
+
+    cmd = "mkdir -p " + TMPPATH
+    print cmd
+    os.system(cmd)
 
     outfile = os.path.join(TMPPATH, basename + ".tif")
     cmd = "gdalwarp -s_srs epsg:2056 -t_srs epsg:2056 -te "  + str(minX - BUFFER) + " " +  str(minY - BUFFER) + " " +  str(maxX + BUFFER) + " " +  str(maxY + BUFFER)
@@ -77,6 +77,6 @@ for feature in layer:
     print cmd
     os.system(cmd)
 
-cmd = "rm -rf " + TMPPATH
-print cmd
-os.system(cmd)
+    cmd = "rm -rf " + TMPPATH
+    print cmd
+    os.system(cmd)
