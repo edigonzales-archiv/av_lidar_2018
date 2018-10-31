@@ -44,7 +44,7 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   # config.vm.synced_folder "../data", "/vagrant_data"
 
-  config.vm.synced_folder "/Volumes/Elements/", "/lidar2018"
+  config.vm.synced_folder "/Volumes/LiDAR2018/", "/lidar2018"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -73,6 +73,7 @@ Vagrant.configure("2") do |config|
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
+  config.vm.provision :docker
   config.vm.provision "shell", inline: <<-SHELL
     locale-gen de_CH.utf8
     echo "Europe/Zurich" | tee /etc/timezone

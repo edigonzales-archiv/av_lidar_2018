@@ -5,11 +5,12 @@ from osgeo import ogr, osr
 import os
 import sys
 
-INPATH = "/lidar2018/05_DTM_ASCII_25cm/"
-#INPATH = "/lidar2018/07_DOM_ASCII_25cm/"
-OUTPATH = "/lidar2018/99_Derivate/dtm_25cm/"
-#OUTPATH = "/lidar2018/99_Derivate/dom_25cm/"
-TMPPATH = "/tmp/"
+#INPATH = "/lidar2018/05_DTM_ASCII_25cm/"
+INPATH = "/lidar2018/07_DOM_ASCII_25cm/"
+#OUTPATH = "/lidar2018/99_Derivate/dtm_25cm/"
+OUTPATH = "/lidar2018/99_Derivate/dom_25cm/"
+#TMPPATH = "/tmp/"
+TMPPATH = "/tmp/dom/"
 
 shp = ogr.Open("../tileindex/lidar2018.shp")
 layer = shp.GetLayer(0)

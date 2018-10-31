@@ -5,17 +5,16 @@ from osgeo import ogr, osr
 import os
 import sys
 
-VRT = "/lidar2018/derivate/dtm_25cm/dtm_25cm.vrt"
-TINDEX = "/lidar2018/derivate/dtm_25cm/dtm_25cm.shp"
-INPATH = "/lidar2018/derivate/dtm_25cm/"
-OUTPATH = "/lidar2018/derivate/dtm_25cm_hillshade/"
-TMPPATH = "/tmp/hillshade/"
+VRT = "/lidar2018/99_Derivate/dom_25cm/dom_25cm.vrt"
+TINDEX = "../tileindex/lidar2018.shp"
+INPATH = "/lidar2018/99_Derivate/dom_25cm/"
+OUTPATH = "/lidar2018/99_Derivate/dom_25cm_hillshade/"
+TMPPATH = "/tmp/hillshade/dom/"
 BUFFER = 10
 
-cmd = "mkdir " + TMPPATH
+cmd = "mkdir -p " + TMPPATH
 print cmd
 os.system(cmd)
-
 
 shp = ogr.Open("../tileindex/lidar2018.shp")
 layer = shp.GetLayer(0)
@@ -39,7 +38,7 @@ for feature in layer:
 
     outfile = os.path.join(TMPPATH, basename + ".tif")
     cmd = "gdalwarp -s_srs epsg:2056 -t_srs epsg:2056 -te "  + str(minX - BUFFER) + " " +  str(minY - BUFFER) + " " +  str(maxX + BUFFER) + " " +  str(maxY + BUFFER)
-    cmd += " -tr 0.5 0.5 -wo NUM_THREADS=ALL_CPUS -co 'TILED=YES' -co 'PROFILE=GeoTIFF'"
+    cmd += " -tr 0.25 0.25 -wo NUM_THREADS=ALL_CPUS -co 'TILED=YES' -co 'PROFILE=GeoTIFF'"
     cmd += " -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' "
     cmd += " -r bilinear " + VRT + " " + outfile
     print cmd
@@ -60,7 +59,7 @@ for feature in layer:
     infile = outfile
     outfile = os.path.join(TMPPATH, "tmp_3_" + basename + ".tif")
     cmd = "gdalwarp -overwrite -s_srs epsg:2056 -t_srs epsg:2056 -te "  + str(minX) + " " +  str(minY) + " " +  str(maxX) + " " +  str(maxY)
-    cmd += " -tr 0.5 0.5 -wo NUM_THREADS=ALL_CPUS -co 'TILED=YES' -co 'PROFILE=GeoTIFF'"
+    cmd += " -tr 0.25 0.25 -wo NUM_THREADS=ALL_CPUS -co 'TILED=YES' -co 'PROFILE=GeoTIFF'"
     cmd += " -r bilinear " + infile + " " + outfile
     print cmd
     os.system(cmd)
@@ -77,9 +76,6 @@ for feature in layer:
     cmd += outfile + " 2 4 8 16 32 64 "
     print cmd
     os.system(cmd)
-
-    break
-
 
 cmd = "rm -rf " + TMPPATH
 print cmd
