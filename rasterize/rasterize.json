@@ -1,0 +1,31 @@
+{
+    "pipeline":[
+      {
+        "type" : "readers.las",
+        "filename" : "/input/2590500_1254000.las"
+      },      
+      {
+        "type":"filters.hag"
+      },
+      {
+        "type":"filters.ferry",
+        "dimensions":"HeightAboveGround=Z"
+      },
+      {
+        "type":"filters.range",
+        "limits":"Classification[6:6]"
+      },
+
+      {
+        "type":"writers.gdal",
+        "filename":"/output/allschwil-05.tif",
+        "dimension":"Z",
+        "data_type":"float",
+        "output_type":"mean",
+        "resolution":0.25,
+        "bounds":"([2590500.00,2590999.75],[1254000.00,1254499.75])",
+        "gdalopts":"co=TILED=YES",
+        "gdalopts":"co=COMPRESS=DEFLATE"
+      }
+    ]
+  }
