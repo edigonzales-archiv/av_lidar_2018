@@ -29,7 +29,6 @@ for feature in layer:
     maxX = int(env[1] + 0.001)
     maxY = int(env[3] + 0.001)
     
-    outfile = os.path.join(OUTPATH, basename + "_buildings.tif")
     bounds = "(["+str(minX)+","+str(maxX-0.25)+"],["+str(minY)+","+str(maxY-0.25)+"])"
 
     #cmd = 'docker run -v /vagrant/rasterize:/data -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/buildings/tif:/output pdal/pdal pdal pipeline --nostream --readers.las.filename="/input/'+basename+'.las" --writers.gdal.filename="/output/'+basename+'_buildings.tif" --filters.range.limits="Classification[6:6]" /data/rasterize.json'
