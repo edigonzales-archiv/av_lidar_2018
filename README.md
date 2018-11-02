@@ -18,8 +18,17 @@ gdalbuildvrt -addalpha dtm_25cm.vrt *.tif
 
 export GDAL_CACHEMAX=2048
 gdalwarp -tr 5.0 5.0 -r bilinear -of GTiff -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dtm_25cm.vrt dtm_5m.tif
-
 gdaladdo -r average dtm_5m.tif 2 4 8 16 32 64 128 256
+
+gdalwarp -tr 2.0 2.0 -r bilinear -of GTiff -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dtm_25cm.vrt dtm_2m.tif
+gdaladdo -r average dtm_2m.tif 2 4 8 16 32 64 128 256
+
+gdalwarp -tr 1.0 1.0 -r bilinear -of GTiff -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dtm_25cm.vrt dtm_1m.tif
+gdaladdo -r average dtm_1m.tif 2 4 8 16 32 64 128 256
+
+gdalwarp -tr 0.5 0.5 -r bilinear -of GTiff -co 'BIGTIFF=YES' -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dtm_25cm.vrt dtm_50cm.tif
+gdaladdo -r average dtm_50cm.tif 2 4 8 16 32 64 128 256
+
 
 ```
 
@@ -58,6 +67,15 @@ gdaladdo -r average dtm_5m_hillshade.tif 2 4 8 16 32 64 128 256
 # Version 2 (via 5m DTM)
 gdaldem hillshade -compute_edges -multidirectional ../dtm_25cm/dtm_5m.tif dtm_5m_hillshade_v2.tif
 gdaladdo -r average dtm_5m_hillshade_v2.tif 2 4 8 16 32 64 128 256
+
+gdaldem hillshade -compute_edges -multidirectional ../dtm_25cm/dtm_2m.tif dtm_2m_hillshade_v2.tif
+gdaladdo -r average dtm_2m_hillshade_v2.tif 2 4 8 16 32 64 128 256
+
+gdaldem hillshade -compute_edges -multidirectional ../dtm_25cm/dtm_1m.tif dtm_1m_hillshade_v2.tif
+gdaladdo -r average dtm_1m_hillshade_v2.tif 2 4 8 16 32 64 128 256
+
+gdaldem hillshade -co 'BIGTIFF=YES' -compute_edges -multidirectional ../dtm_25cm/dtm_50cm.tif dtm_50cm_hillshade_v2.tif
+gdaladdo -r average dtm_50cm_hillshade_v2.tif 2 4 8 16 32 64 128 256
 
 # Einzelnes 25cm BigTIFF
 export GDAL_CACHEMAX=2048
