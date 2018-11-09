@@ -36,3 +36,15 @@ for feature in layer:
     print cmd
     x = os.system(cmd)
 
+
+#docker run -v /vagrant/rasterize:/data -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/vegetation/tif:/output pdal/pdal pdal pipeline --nostream --readers.las.filename="/input/2593000_1252000.las" --writers.gdal.filename="/output/2593000_1252000_vegetation.tif" --writers.gdal.bounds="([2593000,2593499.75],[1252000,1252499.75])" --filters.range.limits="Classification[4:5]" /data/rasterize.json
+#(pdal pipeline readers.las Error) Invalid SRS specification.  GeoTiff not allowed with point formats 6 - 10.
+
+#docker run -v /vagrant/rasterize:/data -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/vegetation/tif:/output pdal/pdal pdal pipeline --nostream --readers.las.filename="/input/2593500_1252000.las" --writers.gdal.filename="/output/2593500_1252000_vegetation.tif" --writers.gdal.bounds="([2593500,2593999.75],[1252000,1252499.75])" --filters.range.limits="Classification[4:5]" /data/rasterize.json
+#(pdal pipeline readers.las Error) Invalid SRS specification.  GeoTiff not allowed with point formats 6 - 10.
+
+#docker run -v /vagrant/rasterize:/data -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/vegetation/tif:/output pdal/pdal pdal pipeline --nostream --readers.las.filename="/input/2597000_1253000.las" --writers.gdal.filename="/output/2597000_1253000_vegetation.tif" --writers.gdal.bounds="([2597000,2597499.75],[1253000,1253499.75])" --filters.range.limits="Classification[4:5]" /data/rasterize.json
+#(pdal pipeline readers.las Error) Invalid SRS specification.  GeoTiff not allowed with point formats 6 - 10.
+
+#docker run -v /vagrant/rasterize:/data -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/vegetation/tif:/output pdal/pdal pdal pipeline --nostream --readers.las.filename="/input/2598000_1253000.las" --writers.gdal.filename="/output/2598000_1253000_vegetation.tif" --writers.gdal.bounds="([2598000,2598499.75],[1253000,1253499.75])" --filters.range.limits="Classification[4:5]" /data/rasterize.json
+#(pdal pipeline readers.las Error) Invalid SRS specification.  GeoTiff not allowed with point formats 6 - 10.

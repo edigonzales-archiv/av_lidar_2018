@@ -131,14 +131,102 @@ gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr 2
 gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr 2
 gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr.ovr 2
 gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+
 gdal_translate dom_25cm_hillshade.tif dom_25cm_hillshade_with_ovr.tif -co 'COPY_SRC_OVERVIEWS=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -co 'TILED=YES' -co 'BIGTIFF=YES'
 
 ```
 
 
+**DOM Hillshade default**
+```
+gdalbuildvrt -addalpha dom_25cm_hillshade.vrt *.tif
+
+export GDAL_CACHEMAX=2048
+gdalwarp -tr 0.25 0.25 -of GTiff -co 'BIGTIFF=YES' -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dom_25cm_hillshade.vrt dom_25cm_hillshade.tif
+
+gdaladdo -ro -r average dom_25cm_hillshade.tif 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dom_25cm_hillshade.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+
+gdal_translate dom_25cm_hillshade.tif dom_25cm_hillshade_with_ovr.tif -co 'COPY_SRC_OVERVIEWS=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -co 'TILED=YES' -co 'BIGTIFF=YES'
+
+```
+
+
+**DTM Slope**:
+```
+gdalbuildvrt -addalpha dtm_25cm_slope.vrt *.tif
+
+# Einzelnes 25cm BigTIFF
+export GDAL_CACHEMAX=2048
+gdalwarp -tr 0.25 0.25 -of GTiff -co 'BIGTIFF=YES' -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 dtm_25cm_slope.vrt dtm_25cm_slope.tif
+
+gdaladdo -ro -r average dtm_25cm_slope.tif 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average dtm_25cm_slope.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+
+gdal_translate dtm_25cm_slope.tif dtm_25cm_slope_with_ovr.tif -co 'COPY_SRC_OVERVIEWS=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -co 'TILED=YES' -co 'BIGTIFF=YES'
+
+
+```
+
+
+
+
 **PDAL**:
 
 ```
+gdalbuildvrt -addalpha buildings_25cm.vrt *.tif
+
+export GDAL_CACHEMAX=2048
+gdalwarp -tr 0.25 0.25 -of GTiff -co 'BIGTIFF=YES' -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 buildings_25cm.vrt buildings_25cm.tif
+
+gdaladdo -ro -r average buildings_25cm.tif 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average buildings_25cm.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+
+gdal_translate buildings_25cm.tif buildings_25cm_with_ovr.tif -co 'COPY_SRC_OVERVIEWS=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -co 'TILED=YES' -co 'BIGTIFF=YES'
+
+
+----
+
+
+gdalbuildvrt -addalpha vegetation_25cm.vrt *.tif
+
+export GDAL_CACHEMAX=2048
+gdalwarp -tr 0.25 0.25 -of GTiff -co 'BIGTIFF=YES' -co 'TILED=YES' -co 'PROFILE=GeoTIFF'  -co 'INTERLEAVE=PIXEL' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -wo NUM_THREADS=ALL_CPUS -s_srs epsg:2056 -t_srs epsg:2056 vegetation_25cm.vrt vegetation_25cm.tif
+
+gdaladdo -ro -r average vegetation_25cm.tif 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+gdaladdo -ro -r average vegetation_25cm.tif.ovr.ovr.ovr.ovr.ovr.ovr.ovr.ovr 2
+
+gdal_translate vegetation_25cm.tif vegetation_25cm_with_ovr.tif -co 'COPY_SRC_OVERVIEWS=YES' -co 'COMPRESS=DEFLATE' -co 'PREDICTOR=2' -co 'TILED=YES' -co 'BIGTIFF=YES'
+
+
+
+
 docker run -v /lidar2018/01_Punktwolke_LAS:/input -v /Samsung_T5/99_Derivate/buildings/las:/output pdal/pdal pdal translate -i /input/2590500_1253500.las -o /output/2590500_1253500_buildings.las -f range --filters.range.limits="Classification[6:6]"
 
 
